@@ -57,7 +57,7 @@ export const OurFleetAndAdventure: React.FC = () => {
         </div>
 
         <h2 className="text-2xl font-semibold text-gray-900 mt-16">Our Adventure Routes</h2>
-        <p className="text-lg text-gray-600 mb-8">
+        <p className="text-lg text-white mb-8">
           Embark on a thrilling journey with our curated adventure routes. Whether you love mountain roads, coastal paths, or exploring hidden gems, we've got the perfect route for you.
         </p>
 
@@ -73,7 +73,7 @@ export const OurFleetAndAdventure: React.FC = () => {
                   alt={route.title}
                   className="w-full h-48 object-cover rounded-lg transition-all duration-500 transform hover:scale-110 hover:blur-sm"
                 />
-                <div className="absolute inset-0 flex items-center justify-center bg-slate-500 bg-opacity-5 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 flex items-center justify-center bg-white bg-opacity-5 rounded-lg opacity-0 hover:opacity-100 transition-opacity duration-300">
                   <p className="text-white text-lg font-bold">{route.title}</p>
                 </div>
               </div>
