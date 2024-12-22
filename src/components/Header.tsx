@@ -41,7 +41,7 @@ export const Header = () => {
             <span
               className={cn(
                 'text-2xl font-bold tracking-wide transition-colors duration-300',
-                isScrolled ? 'text-gray-900' : 'text-white'
+                isScrolled ? 'text-gray-900' : 'text-black'
               )}
             >
               Enfield Bike Rental
@@ -62,7 +62,7 @@ export const Header = () => {
                 key={item.label}
                 href={item.href}
                 className={cn(
-                  'transition-colors duration-300 hover:text-white hover:underline',
+                  'transition-colors duration-300 hover:text-black hover:underline',
                   isScrolled ? 'text-gray-700' : 'text-white'
                 )}
                 onClick={item.onClick}
