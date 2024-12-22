@@ -64,7 +64,6 @@ export const AuthPage: React.FC = () => {
 
   return (
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/path-to-your-motorcycle-image.jpg)' }}>
-      {/* Background Animation (Gradient Animation) */}
       <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-blue-600 to-purple-800 opacity-50 animate-gradient" />
       
       {/* Main Content */}

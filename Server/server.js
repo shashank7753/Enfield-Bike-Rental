@@ -12,16 +12,16 @@ app.use(bodyParser.json());
 
 // PostgreSQL Pool
 const pool = new Pool({
-  user: 'your_db_user',
+  user: 'postgres',
   host: 'localhost',
-  database: 'your_db_name',
-  password: 'your_db_password',
+  database: 'user',
+  password: 'Samsung#22',
   port: 5432,
 });
 
 // Firebase Admin SDK
 admin.initializeApp({
-  credential: admin.credential.cert(require('./confi/enfield-bike-rental-firebase-adminsdk-h4yws-2f3d8ef967.json')),
+  credential: admin.credential.cert(require('./config/enfield-bike-rental-firebase-adminsdk-h4yws-2f3d8ef967.json')),
 });
 
 // Middleware to Verify Firebase Token

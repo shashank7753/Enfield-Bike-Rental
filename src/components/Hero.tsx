@@ -72,6 +72,7 @@ export const Hero = () => {
               </div>
             </div>
           </div>
+          <div className="mt-10"></div>
         </div>
       </div>
     </div>
