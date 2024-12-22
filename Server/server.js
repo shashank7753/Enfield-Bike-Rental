@@ -1,127 +1,83 @@
-// const express = require('express');
-// const mongoose = require('mongoose');
-// const cors = require('cors');
-// const bodyParser = require('body-parser');
-
-// const app = express();
-// const PORT = 5001;
-
-// // Middleware
-// app.use(cors());
-// app.use(bodyParser.json());
-
-// // MongoDB connection - Use MongoDB Atlas connection string
-// const mongoURI = 'mongodb+srv://shashank33379:SMIs5EbnHaN5Wcau@enfield1.ufmik.mongodb.net/';
-
-// // Connect to MongoDB Atlas
-// mongoose.connect(mongoURI)
-//   .then(() => console.log('Connected to MongoDB Atlas'))
-//   .catch((error) => console.error('Error connecting to MongoDB:', error));
-
-// // Motorcycle schema and model
-// const motorcycleSchema = new mongoose.Schema({
-//   name: String,
-//   type: String,
-//   cc: Number,
-//   price: Number,
-//   description: String,
-//   image: String,
-//   rating: Number,
-// });
-
-// const Motorcycle = mongoose.model('Motorcycle', motorcycleSchema);
-
-// // POST route to add a motorcycle
-// app.post('/api/motorcycles', async (req, res) => {
-//     try {
-//       const newMotorcycle = new Motorcycle(req.body);
-//       await newMotorcycle.save();
-//       res.status(201).json({ message: 'Motorcycle added successfully' });
-//     } catch (error) {
-//       res.status(500).json({ error: 'Failed to add motorcycle' });
-//     }
-//   });
-  
-// // Start server
-// app.get('/', (req, res) => {
-//     res.send('Server is up and running');
-//   });
-  
-// app.listen(PORT, () => {
-//   console.log(`Server is running on port ${PORT}`);
-// });
-
-
-
 const express = require('express');
-const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const stripe = require('stripe')('your_stripe_secret_key'); // Replace with your Stripe secret key
+const { Pool } = require('pg');
+const admin = require('firebase-admin');
 
 const app = express();
-const PORT = 5001;
+const port = 6000;
 
-// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// MongoDB connection - Use MongoDB Atlas connection string
-const mongoURI = 'mongodb+srv://shashank33379:SMIs5EbnHaN5Wcau@enfield1.ufmik.mongodb.net/';
-
-mongoose.connect(mongoURI)
-  .then(() => console.log('Connected to MongoDB Atlas'))
-  .catch((error) => console.error('Error connecting to MongoDB:', error));
-
-// Motorcycle schema and model
-const motorcycleSchema = new mongoose.Schema({
-  name: String,
-  type: String,
-  cc: Number,
-  price: Number,
-  description: String,
-  image: String,
-  rating: Number,
+// PostgreSQL Pool
+const pool = new Pool({
+  user: 'your_db_user',
+  host: 'localhost',
+  database: 'your_db_name',
+  password: 'your_db_password',
+  port: 5432,
 });
 
-const Motorcycle = mongoose.model('Motorcycle', motorcycleSchema);
+// Firebase Admin SDK
+admin.initializeApp({
+  credential: admin.credential.cert(require('./confi/enfield-bike-rental-firebase-adminsdk-h4yws-2f3d8ef967.json')),
+});
 
-// POST route to add a motorcycle
-app.post('/api/motorcycles', async (req, res) => {
+// Middleware to Verify Firebase Token
+const verifyToken = async (req, res, next) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Unauthorized' });
+
   try {
-    const newMotorcycle = new Motorcycle(req.body);
-    await newMotorcycle.save();
-    res.status(201).json({ message: 'Motorcycle added successfully' });
+    const decodedToken = await admin.auth().verifyIdToken(token);
+    req.user = decodedToken;
+    next();
   } catch (error) {
-    res.status(500).json({ error: 'Failed to add motorcycle' });
+    res.status(403).json({ message: 'Invalid token' });
+  }
+};
+
+// Get User Data
+app.get('/user-data', verifyToken, async (req, res) => {
+  const { uid } = req.user;
+
+  try {
+    const userResult = await pool.query('SELECT id, role FROM users WHERE firebase_uid = $1', [uid]);
+    if (userResult.rows.length === 0) return res.status(404).json({ message: 'User not found' });
+
+    const userId = userResult.rows[0].id;
+    const role = userResult.rows[0].role;
+
+    // Fetch data based on role
+    if (role === 'admin') {
+      const dataResult = await pool.query('SELECT * FROM user_data');
+      res.json(dataResult.rows);
+    } else {
+      const dataResult = await pool.query('SELECT * FROM user_data WHERE user_id = $1', [userId]);
+      res.json(dataResult.rows);
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
   }
 });
 
-// POST route to handle Stripe payments
-app.post('/api/payment', async (req, res) => {
+// Add User Data
+app.post('/user-data', verifyToken, async (req, res) => {
+  const { uid } = req.user;
+  const { data } = req.body;
+
   try {
-    const { amount, token } = req.body;
+    const userResult = await pool.query('SELECT id FROM users WHERE firebase_uid = $1', [uid]);
+    if (userResult.rows.length === 0) return res.status(404).json({ message: 'User not found' });
 
-    // Create the charge with Stripe
-    const charge = await stripe.charges.create({
-      amount: amount * 100, // Stripe expects the amount in cents
-      currency: 'inr', // You can adjust the currency
-      source: token.id, // Token from frontend
-      description: 'Motorcycle Rental Payment',
-    });
+    const userId = userResult.rows[0].id;
 
-    res.status(200).json({ success: true, message: 'Payment successful', charge });
+    await pool.query('INSERT INTO user_data (user_id, data) VALUES ($1, $2)', [userId, data]);
+    res.status(201).json({ message: 'Data added successfully' });
   } catch (error) {
-    console.error('Payment error:', error);
-    res.status(500).json({ success: false, message: 'Payment failed' });
+    res.status(500).json({ message: 'Server error', error });
   }
 });
 
-// Start server
-app.get('/', (req, res) => {
-  res.send('Server is up and running');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+app.listen(port, () => console.log(`Server running on port ${port}`));
