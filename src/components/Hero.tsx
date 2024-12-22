@@ -1,18 +1,22 @@
-
-
+import React, { useState } from 'react';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export const Hero = () => {
-  const [location, setLocation] = useState('');
+export const Hero: React.FC = () => {
+  const [location, setLocation] = useState<string>('');
+  const [pickupDate, setPickupDate] = useState<string>('');
+  const [pickupTime, setPickupTime] = useState<string>('');
+  const [dropoffDate, setDropoffDate] = useState<string>('');
+  const [dropoffTime, setDropoffTime] = useState<string>('');
 
-  const fetchUserLocation = () => {
+  const navigate = useNavigate();
+
+  const fetchUserLocation = (): void => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        async (position) => {
+        async (position: GeolocationPosition) => {
           const { latitude, longitude } = position.coords;
           try {
-            // Reverse geocode to get human-readable location
             const response = await fetch(
               `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
             );
@@ -32,6 +36,17 @@ export const Hero = () => {
     }
   };
 
+  const handleConfirm = (): void => {
+    navigate('/MotorcycleCard', {
+      state: {
+        pickupDate,
+        pickupTime,
+        dropoffDate,
+        dropoffTime,
+      },
+    });
+  };
+
   return (
     <div className="relative">
       <div className="absolute inset-0">
@@ -42,6 +57,62 @@ export const Hero = () => {
         />
         <div className="absolute inset-0 bg-gray-500/70 mix-blend-multiply" />
       </div>
+
+      <div className="absolute top-4 right-4 bg-white p-4 rounded-lg shadow-lg w-full max-w-md sm:max-w-sm">
+        <div className="grid gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Pickup Date
+            </label>
+            <input
+              type="date"
+              value={pickupDate}
+              onChange={(e) => setPickupDate(e.target.value)}
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Pickup Time
+            </label>
+            <input
+              type="time"
+              value={pickupTime}
+              onChange={(e) => setPickupTime(e.target.value)}
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Dropoff Date
+            </label>
+            <input
+              type="date"
+              value={dropoffDate}
+              onChange={(e) => setDropoffDate(e.target.value)}
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Dropoff Time
+            </label>
+            <input
+              type="time"
+              value={dropoffTime}
+              onChange={(e) => setDropoffTime(e.target.value)}
+              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+            />
+          </div>
+        </div>
+        <button
+          onClick={handleConfirm}
+          className="w-full mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+        >
+          Confirm
+        </button>
+      </div>
+
       <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
           Rent Your Dream Ride
@@ -52,7 +123,7 @@ export const Hero = () => {
         <div className="mt-10">
           <div className="max-w-xl mx-auto bg-white rounded-lg shadow-lg">
             <div className="p-4">
-              <div className="flex items-center space-x-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
                 <div className="flex-1">
                   <input
                     type="text"
@@ -64,7 +135,7 @@ export const Hero = () => {
                 </div>
                 <button
                   onClick={fetchUserLocation}
-                  className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 flex items-center space-x-2"
+                  className="bg-indigo-600 text-white px-6 py-2 mt-4 sm:mt-0 rounded-md hover:bg-indigo-700 flex items-center space-x-2"
                 >
                   <Search className="h-5 w-5" />
                   <span>Use My Location</span>

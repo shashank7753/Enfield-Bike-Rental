@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
@@ -8,13 +9,17 @@ import { ListBikeForm } from './components/ListBikeForm/ListBikeForm';
 import { AuthPage } from './components/AuthPage';
 import { Dashboard } from './pages/Dashboard';
 import { Toaster } from 'react-hot-toast';
-import { OurFleetAndAdventure } from './pages/OurFleetAndAdventure'; // Import the new page component
+import { OurFleetAndAdventure } from './pages/OurFleetAndAdventure';
+import { AboutUs } from './pages/AboutUs'; // Import About Us page
+import { HowItWorks } from './pages/HowItWorks'; // Import How It Works page
+import { Safety } from './pages/Safety'; // Import Safety page
+import { Contact } from './pages/Contact'; // Import Contact page
 
 // Mock data imports
 import { motorcycles } from './data/motorcycles';
 import { reviews } from './data/reviews';
 
-function App() {
+const App: React.FC = () => {
   return (
     <Router>
       <Toaster position="top-right" />
@@ -27,7 +32,6 @@ function App() {
             element={
               <>
                 <Hero />
-                  {/* New Section for Our Fleet and Adventure */}
                 <section id="our-fleet-and-adventure" className="py-16 bg-gray-800 text-white">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <h2 className="text-3xl font-bold mb-8">Our Fleet and Adventure</h2>
@@ -63,6 +67,12 @@ function App() {
             }
           />
 
+          {/* About Us, How It Works, Safety, Contact Routes */}
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/how-it-works" element={<HowItWorks />} />
+          <Route path="/safety" element={<Safety />} />
+          <Route path="/contact" element={<Contact />} />
+
           {/* List a Bike Route */}
           <Route path="/list-bike" element={<ListBikeForm />} />
 
@@ -86,10 +96,10 @@ function App() {
               <div>
                 <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
                 <ul className="space-y-2">
-                  <li><a href="#about-us" className="text-gray-400 hover:text-white">About Us</a></li>
-                  <li><a href="#how-it-works" className="text-gray-400 hover:text-white">How It Works</a></li>
-                  <li><a href="#safety" className="text-gray-400 hover:text-white">Safety</a></li>
-                  <li><a href="#contact" className="text-gray-400 hover:text-white">Contact</a></li>
+                  <li><a href="/about-us" className="text-gray-400 hover:text-white">About Us</a></li>
+                  <li><a href="/how-it-works" className="text-gray-400 hover:text-white">How It Works</a></li>
+                  <li><a href="/safety" className="text-gray-400 hover:text-white">Safety</a></li>
+                  <li><a href="/contact" className="text-gray-400 hover:text-white">Contact</a></li>
                 </ul>
               </div>
               <div>
