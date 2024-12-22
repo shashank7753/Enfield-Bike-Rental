@@ -15,7 +15,7 @@ export const motorcycles = [
   },
   {
     id: '2',
-    name: 'Ducati Monster',
+    name: 'Metor 350',
     image: 'https://imgd.aeplcdn.com/1056x594/n/bwarseb_1777261.jpg?q=80',
     price: 1200,
     type: 'Cruiser',
