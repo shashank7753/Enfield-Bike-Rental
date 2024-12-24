@@ -61,7 +61,6 @@ export const Header = () => {
             {[
               { label: 'Home', href: '#' },
               { label: 'Motorcycles', href: '#motorcycles' },
-              { label: 'Reviews', href: '#reviews' },
               { label: 'List Your Bike', href: '/list-bike' },
               { label: 'Login/SignUp', href: '/auth', onClick: handleLogin },
               { label: 'Account',href:'/account'}
@@ -103,7 +102,6 @@ export const Header = () => {
               {[
                 { label: 'Home', href: '#hero' },
                 { label: 'Motorcycles', href: '#motorcycles' },
-                { label: 'Reviews', href: '#reviews' },
                 { label: 'List Your Bike', href: '/list-bike' },
                 { label: 'Login/SignUp', href: '#auth', onClick: handleLogin },
                 { label: 'Account',href:'/user-admin'}

@@ -7,10 +7,7 @@ export interface Motorcycle {
   cc: number;
   available: boolean;
   rating: number;
-  owner: {
-    name: string;
-    rating: number;
-  };
+ 
 }
 
 export interface Review {

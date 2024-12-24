@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Star } from 'lucide-react';
-import type { Motorcycle } from '../types';
 import MotorcyclePayment from './MotorcyclePayment';
+import { Motorcycle } from '../../types';
 
 interface MotorcycleCardProps {
   motorcycle: Motorcycle;
