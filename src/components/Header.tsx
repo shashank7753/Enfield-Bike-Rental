@@ -21,6 +21,11 @@ export const Header = () => {
     navigate('/');
   };
 
+  const handleNavigation = (path: string) => {
+    navigate(path);
+  };
+
+
   return (
     <header
       className={cn(
@@ -31,7 +36,10 @@ export const Header = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-3">
+          <div
+            className="flex items-center space-x-3 cursor-pointer"
+            onClick={() => handleNavigation('#')}
+          >
             <Bike
               className={cn(
                 'h-8 w-8 transition-transform duration-300',
@@ -118,3 +126,6 @@ export const Header = () => {
     </header>
   );
 };
+
+
+
