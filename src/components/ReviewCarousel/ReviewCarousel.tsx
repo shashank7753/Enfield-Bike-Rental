@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useInterval } from '../../hooks/useInterval';
 import { CarouselButton } from './CarouselButton';
-import { ReviewCard } from '../ReviewCard';
+import { ReviewCard } from '../Mainpage/ReviewCard';
 import type { Review } from '../../types';
 
 interface ReviewCarouselProps {

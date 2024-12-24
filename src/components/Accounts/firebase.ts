@@ -3,13 +3,12 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCOiAYXCusD33NhdDDbWNxhLMD8x3bdocs",
-  authDomain: "enfield-bike-rental.firebaseapp.com",
-  projectId: "enfield-bike-rental",
-  storageBucket: "enfield-bike-rental.firebasestorage.app",
-  messagingSenderId: "892840901493",
-  appId: "1:892840901493:web:75a4074604f77e9e45313c",
-  // measurementId: "G-C8SH0TLKBB"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 

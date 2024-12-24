@@ -82,6 +82,9 @@
 
 // app.listen(port, () => console.log(`Server running on port ${port}`));
 
+
+
+
 require('dotenv').config(); // Load environment variables from .env file
 
 const express = require('express');
@@ -91,11 +94,11 @@ const { Pool } = require('pg');
 const admin = require('firebase-admin');
 
 const app = express();
-const port = process.env.PORT || 6000; // Use environment variable for port
+const port = process.env.PORT || 6003; // Use environment variable for port
 
 // CORS Configuration
 const corsOptions = {
-  origin: 'https://your-frontend-domain.com', // Replace with your actual frontend domain
+  origin: ' http://localhost:5173/', // Replace with your actual frontend domain
   methods: 'GET,POST',
 };
 app.use(cors(corsOptions)); // Apply CORS configuration to all routes

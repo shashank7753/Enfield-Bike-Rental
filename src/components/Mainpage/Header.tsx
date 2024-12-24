@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Bike, Menu, X } from 'lucide-react';
-import { cn } from '../utils/cn';
+import { cn } from '../../utils/cn';
 import { useNavigate } from 'react-router-dom';
 
 export const Header = () => {
@@ -64,7 +64,7 @@ export const Header = () => {
               { label: 'Reviews', href: '#reviews' },
               { label: 'List Your Bike', href: '/list-bike' },
               { label: 'Login/SignUp', href: '/auth', onClick: handleLogin },
-              { label: 'Account',href:'/user-admin'}
+              { label: 'Account',href:'/account'}
             ].map((item) => (
               <a
                 key={item.label}
@@ -106,6 +106,7 @@ export const Header = () => {
                 { label: 'Reviews', href: '#reviews' },
                 { label: 'List Your Bike', href: '/list-bike' },
                 { label: 'Login/SignUp', href: '#auth', onClick: handleLogin },
+                { label: 'Account',href:'/user-admin'}
               ].map((item) => (
                 <a
                   key={item.label}

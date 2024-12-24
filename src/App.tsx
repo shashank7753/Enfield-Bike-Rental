@@ -1,21 +1,19 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { MotorcycleCard } from './components/MotorcycleCard';
+import { Header } from './components/Mainpage/Header';
+import { Hero } from './components/Mainpage/Hero';
+import { MotorcycleCard } from './components/Mainpage/MotorcycleCard';
 import { ReviewCarousel } from './components/ReviewCarousel/ReviewCarousel';
-import { Map } from './components/Map';
+import { Map } from './components/Mainpage/Map';
 import { ListBikeForm } from './components/ListBikeForm/ListBikeForm';
-import { AuthPage } from './components/AuthPage';
-import { Dashboard } from './pages/Dashboard';
+import { AuthPage } from './components/Accounts/AuthPage';
+import { Account } from './pages/Account';
 import { Toaster } from 'react-hot-toast';
 import { OurFleetAndAdventure } from './pages/OurFleetAndAdventure';
-import { AboutUs } from './pages/AboutUs'; // Import About Us page
-import { HowItWorks } from './pages/HowItWorks'; // Import How It Works page
-import { Safety } from './pages/Safety'; // Import Safety page
-import { Contact } from './pages/Contact'; // Import Contact page
-
-// Mock data imports
+import { AboutUs } from './pages/AboutUs'; 
+import { HowItWorks } from './pages/HowItWorks'; 
+import { Safety } from './pages/Safety'; 
+import { Contact } from './pages/Contact'; 
 import { motorcycles } from './data/motorcycles';
 import { reviews } from './data/reviews';
 
@@ -79,8 +77,9 @@ const App: React.FC = () => {
           {/* Authentication Page */}
           <Route path="/auth" element={<AuthPage />} />
 
-          {/* Dashboard Routes */}
-          <Route path="/dashboard" element={<Dashboard />} />
+      
+          {/* Existing Routes */}
+          <Route path="/account" element={<Account />} />
           <Route path="/admin-dashboard" element={<h1>Admin Dashboard</h1>} />
           <Route path="/user-dashboard" element={<h1>User Dashboard</h1>} />
         </Routes>
