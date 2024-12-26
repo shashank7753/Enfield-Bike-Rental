@@ -50,7 +50,7 @@ const verifyToken = async (req, res, next) => {
 
 
 // Knex Example Route
-app.get('http://localhost:6000/api/motorcycles', async (req, res) => {
+app.get('/api/motorcycles', async (req, res) => {
   try {
     const motorcycles = await db('motorcycles').select('*'); // Use Knex for this query
     res.json(motorcycles);
