@@ -1,10 +1,10 @@
 {
   "name": "bike-rentals-backend",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
@@ -27,5 +27,6 @@
     "react-dom": "^19.0.0",
     "sequelize": "^6.37.5",
     "stripe": "^17.5.0"
-  }
+  },
+  "description": ""
 }
