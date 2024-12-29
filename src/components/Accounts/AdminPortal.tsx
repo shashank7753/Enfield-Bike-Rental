@@ -1,7 +1,7 @@
 
 import React, { useState } from "react";
 
-// Define Types for User and Bike History
+// Define Types for User 
 interface User {
   id: number;
   name: string;
