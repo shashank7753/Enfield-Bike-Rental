@@ -15,15 +15,15 @@ interface AdventureRoute {
 }
 
 const motorcycles: Motorcycle[] = [
-  { id: 1, name: 'Cruiser', description: 'Experience the freedom of the open road with our premium cruiser motorcycles.', imageUrl: '/images/cruiser.jpg' },
-  { id: 2, name: 'Adventure Bike', description: 'Ready for off-road challenges? Our adventure bikes are built for rugged terrain.', imageUrl: '/images/adventure.jpg' },
-  { id: 3, name: 'Sport Bike', description: 'For thrill-seekers, our sport bikes offer high speed and precision handling.', imageUrl: '/images/sport.jpg' }
+  { id: 1, name: 'Cruiser', description: 'Experience the freedom of the open road with our premium cruiser motorcycles.', imageUrl: 'https://www.travellersofindia.com/wp-content/uploads/2021/08/Adventure_Bikes_in_India_Travellersofindia.com_-1-scaled.jpg' },
+  { id: 2, name: 'Adventure Bike', description: 'Ready for off-road challenges? Our adventure bikes are built for rugged terrain.', imageUrl: 'https://adventuremotorcycle.com/images/ARTICLES/Rides/Nepal-CherylJones/Nepal-Ride-Report-misty.jpg' },
+  { id: 3, name: 'Sport Bike', description: 'For thrill-seekers, our sport bikes offer high speed and precision handling.', imageUrl: 'https://www.motorcycleexpeditions.com/wp-content/uploads/2018/12/HeadAboveTheClouds.jpg' }
 ];
 
 const adventureRoutes: AdventureRoute[] = [
-  { id: 1, title: 'Mountain Adventure', description: 'Experience the thrill of the mountains with winding roads and stunning views.', imageUrl: '/images/mountain.jpg' },
-  { id: 2, title: 'Coastal Ride', description: 'Enjoy the serenity of the sea as you ride along the coastal cliffs.', imageUrl: '/images/coastal.jpg' },
-  { id: 3, title: 'Desert Trail', description: 'Tackle the desert trails with our high-performance adventure bikes.', imageUrl: '/images/desert.jpg' }
+  { id: 1, title: 'Mountain Adventure', description: 'Experience the thrill of the mountains with winding roads and stunning views.', imageUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHdltapPoxjqHx5um8WoKXDGmCqgOsRvup1TzbNj6mTflZ1e2fdBCGMV1jwyQeas4u1Cg&usqp=CAU' },
+  { id: 2, title: 'Coastal Ride', description: 'Enjoy the serenity of the sea as you ride along the coastal cliffs.', imageUrl: 'https://www.madornomad.com/wp-content/uploads/2022/04/How-to-Join-a-Motorcycle-Tour-in-India-36.jpg' },
+  { id: 3, title: 'Desert Trail', description: 'Tackle the desert trails with our high-performance adventure bikes.', imageUrl: 'https://static.wixstatic.com/media/fcf53a_8e241993ade24198808c88f2ffdd06e9~mv2.jpg/v1/fill/w_630,h_434,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/fcf53a_8e241993ade24198808c88f2ffdd06e9~mv2.jpg' }
 ];
 
 export const OurFleetAndAdventure: React.FC = () => {

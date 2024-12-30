@@ -1,4 +1,6 @@
+
 import { useEffect, useState } from 'react';
+import { MotorcycleCard } from './MotorcycleCard'; // Adjust the path as needed
 
 interface Motorcycle {
   id: string;
@@ -18,10 +20,9 @@ const MotorcycleList = () => {
   useEffect(() => {
     fetch('http://localhost:6003/api/motorcycles')
       .then((response) => {
-        // if (!response.ok) {
-        //   throw new Error(`HTTP error! Status: ${response.status}`);
-        // }
-        console.log(response)
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
         return response.json();
       })
       .then((data) => setMotorcycles(data))
@@ -40,11 +41,11 @@ const MotorcycleList = () => {
   }
 
   return (
-    <ul>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {motorcycles.map((motorcycle) => (
-        <li key={motorcycle.id}>{motorcycle.name}</li>
+        <MotorcycleCard key={motorcycle.id} motorcycle={motorcycle} />
       ))}
-    </ul>
+    </div>
   );
 };
 
