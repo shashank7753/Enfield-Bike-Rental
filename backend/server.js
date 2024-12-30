@@ -13,7 +13,7 @@ const port = process.env.PORT || 6003; // Use environment variable for port
 
 // CORS Configuration
 const corsOptions = {
-  origin: ' http://localhost:5173/', // Replace with your actual frontend domain
+  origin: '*', // Replace with your actual frontend domain
   methods: 'GET,POST',
 };
 app.use(cors(corsOptions)); // Apply CORS configuration to all routes

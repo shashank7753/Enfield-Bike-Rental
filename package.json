@@ -17,7 +17,7 @@
     "express": "^4.21.2",
     "firebase": "^11.1.0",
     "knex": "^3.1.0",
-    "lucide-react": "^0.344.0",
+    "lucide-react": "^0.469.0",
     "next-auth": "^4.24.11",
     "pg": "^8.13.1",
     "react": "^19.0.0",

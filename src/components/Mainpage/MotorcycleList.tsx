@@ -18,9 +18,10 @@ const MotorcycleList = () => {
   useEffect(() => {
     fetch('http://localhost:6003/api/motorcycles')
       .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        // if (!response.ok) {
+        //   throw new Error(`HTTP error! Status: ${response.status}`);
+        // }
+        console.log(response)
         return response.json();
       })
       .then((data) => setMotorcycles(data))
