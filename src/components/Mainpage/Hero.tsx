@@ -48,94 +48,40 @@ export const Hero: React.FC = () => {
   };
 
   return (
-    <div className="relative">
+    <div className="relative min-h-[600px] lg:min-h-[700px]">
       <div className="absolute inset-0">
         <img
-          className="w-full h-[600px] object-cover"
+          className="w-full h-full object-cover"
           src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&q=80"
-          alt="Hero"
-        />
+          alt="Hero"  />
         <div className="absolute inset-0 bg-gray-500/70 mix-blend-multiply" />
       </div>
 
-      <div className="absolute top-4 right-4 bg-white p-4 rounded-lg shadow-lg w-full max-w-md sm:max-w-sm">
-        <div className="grid gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Pickup Date
-            </label>
-            <input
-              type="date"
-              value={pickupDate}
-              onChange={(e) => setPickupDate(e.target.value)}
-              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Pickup Time
-            </label>
-            <input
-              type="time"
-              value={pickupTime}
-              onChange={(e) => setPickupTime(e.target.value)}
-              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Dropoff Date
-            </label>
-            <input
-              type="date"
-              value={dropoffDate}
-              onChange={(e) => setDropoffDate(e.target.value)}
-              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Dropoff Time
-            </label>
-            <input
-              type="time"
-              value={dropoffTime}
-              onChange={(e) => setDropoffTime(e.target.value)}
-              className="w-full mt-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-        </div>
-        <button
-          onClick={handleConfirm}
-          className="w-full mt-4 bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
-        >
-          Confirm
-        </button>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-          Rent Your Dream Ride
-        </h1>
-        <p className="mt-6 text-xl text-gray-300 max-w-3xl">
-          Discover the freedom of the open road. Rent a motorcycle from local owners or share your bike with passionate riders.
-        </p>
-        <div className="mt-10">
-          <div className="max-w-xl mx-auto bg-white rounded-lg shadow-lg">
-            <div className="p-4">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4">
-                <div className="flex-1">
-                  <input
-                    type="text"
-                    placeholder="Enter pickup location"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
-                  />
-                </div>
+      {/* Main Content Container */}
+      <div className="relative container mx-auto px-4 py-12 lg:py-24 flex flex-col lg:flex-row items-start lg:items-center justify-between min-h-[600px] lg:min-h-[700px]">
+        {/* Left Side - Hero Text */}
+        <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
+            Rent Your Dream Ride
+          </h1>
+          <p className="text-lg md:text-xl text-gray-300 max-w-2xl">
+            Discover the freedom of the open road. Rent a motorcycle from local owners or share your bike with passionate riders.
+          </p>
+          
+          {/* Location Search */}
+          <div className="mt-8 max-w-xl">
+            <div className="bg-white rounded-lg shadow-lg p-4">
+              <div className="flex flex-col sm:flex-row gap-4">
+                <input
+                  type="text"
+                  placeholder="Enter pickup location"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+                />
                 <button
                   onClick={fetchUserLocation}
-                  className="bg-indigo-600 text-white px-6 py-2 mt-4 sm:mt-0 rounded-md hover:bg-indigo-700 flex items-center space-x-2"
+                  className="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 flex items-center justify-center gap-2 whitespace-nowrap"
                 >
                   <Search className="h-5 w-5" />
                   <span>Use My Location</span>
@@ -143,7 +89,61 @@ export const Hero: React.FC = () => {
               </div>
             </div>
           </div>
-          <div className="mt-10"></div>
+        </div>
+
+        {/* Right Side - Booking Form */}
+        <div className="w-full lg:w-auto lg:min-w-[380px] bg-white rounded-lg shadow-lg p-6">
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Pickup Date
+              </label>
+              <input
+                type="date"
+                value={pickupDate}
+                onChange={(e) => setPickupDate(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Pickup Time
+              </label>
+              <input
+                type="time"
+                value={pickupTime}
+                onChange={(e) => setPickupTime(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Dropoff Date
+              </label>
+              <input
+                type="date"
+                value={dropoffDate}
+                onChange={(e) => setDropoffDate(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Dropoff Time
+              </label>
+              <input
+                type="time"
+                value={dropoffTime}
+                onChange={(e) => setDropoffTime(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            </div>
+            <button
+              onClick={handleConfirm}
+              className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors" >
+              Confirm Booking
+            </button>
+          </div>
         </div>
       </div>
     </div>

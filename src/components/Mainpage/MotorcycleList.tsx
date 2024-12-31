@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { MotorcycleCard } from './MotorcycleCard'; // Adjust the path as needed
+// import { motorcycles } from '../Mainpage/MotorcycleCard';
 
 interface Motorcycle {
   id: string;
@@ -17,6 +18,7 @@ const MotorcycleList = () => {
   const [motorcycles, setMotorcycles] = useState<Motorcycle[]>([]);
   const [error, setError] = useState<string | null>(null);
 
+  
   useEffect(() => {
     fetch('http://localhost:6003/api/motorcycles')
       .then((response) => {
