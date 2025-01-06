@@ -7,7 +7,7 @@ import { ReviewCarousel } from './components/ReviewCarousel/ReviewCarousel';
 import { Map } from './components/Mainpage/Map';
 import { ListBikeForm } from './components/ListBikeForm/ListBikeForm';
 import { AuthPage } from './components/Accounts/AuthPage';
-import { Account } from './pages/Account';
+import { Account } from './components/Accounts/Account';
 import { Toaster } from 'react-hot-toast';
 import { OurFleetAndAdventure } from './pages/OurFleetAndAdventure';
 import { AboutUs } from './pages/AboutUs';
@@ -15,6 +15,8 @@ import { HowItWorks } from './pages/HowItWorks';
 import { Safety } from './pages/Safety';
 import { Contact } from './pages/Contact';
 import { reviews } from './data/reviews';
+import AccountPage from './components/Accounts/AdminPortal';
+import UserPortal from './components/Accounts/UserPortal';
 
 const App: React.FC = () => {
   return (
@@ -75,8 +77,8 @@ const App: React.FC = () => {
 
           {/* Existing Routes */}
           <Route path="/account" element={<Account />} />
-          <Route path="/admin-dashboard" element={<h1>Admin Dashboard</h1>} />
-          <Route path="/user-dashboard" element={<h1>User Dashboard</h1>} />
+        <Route path="/admin-dashboard" element={<AccountPage />} />
+        <Route path="/user-dashboard" element={<UserPortal />} />
         </Routes>
 
         {/* Footer */}

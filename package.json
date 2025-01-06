@@ -20,12 +20,14 @@
     "lucide-react": "^0.469.0",
     "next-auth": "^4.24.11",
     "pg": "^8.13.1",
+    "pg-hstore": "^2.3.4",
     "react": "^19.0.0",
     "react-datepicker": "^7.5.0",
     "react-dom": "^19.0.0",
     "react-hot-toast": "^2.4.1",
     "react-router-dom": "^7.1.0",
     "react-stripe-checkout": "^2.6.3",
+    "sequelize": "^6.37.5",
     "tailwind-merge": "^2.2.1"
   },
   "devDependencies": {
