@@ -13,10 +13,10 @@ export const Safety: React.FC = () => {
           <div>
             <h3 className="text-xl font-semibold text-white mb-4">1. Thorough Bike Inspections</h3>
             <p className="text-lg text-gray-400">
-              Every bike is inspected before and after each rental to ensure it meets safety standards. We check tires, brakes, lights, and more.
+              Every bike is inspected before and after each rental to ensure it meets safety standards. We check tires, brakes, lights, tyres and Newest Safety Halmet.
             </p>
             <img 
-              src="https://via.placeholder.com/500x300" 
+              src="https://news24online.com/wp-content/uploads/2024/09/Royal-enfield.jpg" 
               alt="Bike Inspection" 
               className="mt-4 rounded-lg shadow-lg"
             />
@@ -27,7 +27,7 @@ export const Safety: React.FC = () => {
               Helmets and other safety gear are provided with every rental. We recommend wearing protective gear, including gloves and jackets, for your safety.
             </p>
             <img 
-              src="https://via.placeholder.com/500x300" 
+              src="https://bikeaholic.in/cdn/shop/articles/Blog-3.png?v=1722422624" 
               alt="Safety Gear" 
               className="mt-4 rounded-lg shadow-lg"
             />

@@ -16,7 +16,7 @@ export const HowItWorks: React.FC = () => {
               Explore our selection of well-maintained motorcycles. From sport bikes to cruisers, we have something for every rider.
             </p>
             <img 
-              src="https://via.placeholder.com/300x200" 
+              src="https://www.bullmennroyalenfield.com/wp-content/uploads/2022/06/himalayan-1-768x595.png" 
               alt="Browse Fleet" 
               className="mt-4 rounded-lg shadow-lg"
             />
@@ -27,7 +27,7 @@ export const HowItWorks: React.FC = () => {
               Select your preferred bike based on availability and location. You can filter by type, price, and features.
             </p>
             <img 
-              src="https://via.placeholder.com/300x200" 
+              src="https://cdn.motor1.com/images/mgl/7qk41/s1/4x3/2022-royal-enfield-himalayan---main.webp" 
               alt="Choose Ride" 
               className="mt-4 rounded-lg shadow-lg"
             />
@@ -38,7 +38,7 @@ export const HowItWorks: React.FC = () => {
               Once you’ve made your choice, visit the designated pickup location, get your keys, and hit the road!
             </p>
             <img 
-              src="https://via.placeholder.com/300x200" 
+              src="https://content.jdmagicbox.com/v2/comp/delhi/b9/011pxx11.xx11.200118013916.h4b9/catalogue/royal-bikes-malviya-nagar-delhi-bike-on-rent-cs18kt1czm.jpg?fit=around%7C350:350&crop=350:350;*,*" 
               alt="Pick Up Ride" 
               className="mt-4 rounded-lg shadow-lg"
             />

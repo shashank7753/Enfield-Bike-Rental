@@ -17,7 +17,7 @@ export const AboutUs: React.FC = () => {
           </div>
           <div>
             <img 
-              src="https://via.placeholder.com/500x300" 
+              src="https://www.saranmotors.in/wp-content/uploads/2024/01/royal-enfield-csd-in-vizag-1.jpg" 
               alt="Motorcycles on a scenic ride" 
               className="rounded-lg shadow-lg"
             />
