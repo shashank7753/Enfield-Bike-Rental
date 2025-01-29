@@ -1,30 +1,41 @@
 import { useState, useEffect } from 'react';
-import { Bike, Menu, X } from 'lucide-react';
+import { Bike, Menu, X, User } from 'lucide-react';
 import { cn } from '../../utils/cn';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../Accounts/firebase';
+import { signOut } from 'firebase/auth';
+import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 
 export const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const user = auth.currentUser;
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLogin = () => {
-    navigate('/');
+    navigate('/auth');
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   const handleNavigation = (path: string) => {
     navigate(path);
   };
-
 
   return (
     <header
@@ -38,7 +49,7 @@ export const Header = () => {
           {/* Logo */}
           <div
             className="flex items-center space-x-3 cursor-pointer"
-            onClick={() => handleNavigation('#')}
+            onClick={() => handleNavigation('/')}
           >
             <Bike
               className={cn(
@@ -49,7 +60,7 @@ export const Header = () => {
             <span
               className={cn(
                 'text-2xl font-bold tracking-wide transition-colors duration-300',
-                isScrolled ? 'text-gray-900' : 'text-black'
+                isScrolled ? 'text-gray-900' : 'text-white'
               )}
             >
               Enfield Bike Rental
@@ -57,13 +68,12 @@ export const Header = () => {
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 items-center">
             {[
-              { label: 'Home', href: '#' },
-              { label: 'Motorcycles', href: '#motorcycles' },
+              { label: 'Home', href: '/', as: Link },
+              { label: 'Motorcycles', href: '/motorcycles', as: Link },
               { label: 'List Your Bike', href: '/list-bike' },
-              { label: 'Login/SignUp', href: '/auth', onClick: handleLogin },
-              { label: 'Account',href:'/account'}
+              ...(user ? [] : [{ label: 'Login/SignUp', href: '/auth', onClick: handleLogin }]),
             ].map((item) => (
               <a
                 key={item.label}
@@ -77,6 +87,25 @@ export const Header = () => {
                 {item.label}
               </a>
             ))}
+            {user && (
+              <div className="flex items-center space-x-4">
+                <Avatar className="cursor-pointer" onClick={() => handleNavigation('/account')}>
+                  <AvatarImage src={user.photoURL || undefined} alt={user.displayName || 'User'} />
+                  <AvatarFallback>
+                    <User className="h-6 w-6" />
+                  </AvatarFallback>
+                </Avatar>
+                <button
+                  onClick={handleLogout}
+                  className={cn(
+                    'transition-colors duration-300 hover:text-black hover:underline',
+                    isScrolled ? 'text-gray-700' : 'text-white'
+                  )}
+                >
+                  Logout
+                </button>
+              </div>
+            )}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -103,8 +132,7 @@ export const Header = () => {
                 { label: 'Home', href: '#hero' },
                 { label: 'Motorcycles', href: '#motorcycles' },
                 { label: 'List Your Bike', href: '/list-bike' },
-                { label: 'Login/SignUp', href: '#auth', onClick: handleLogin },
-                { label: 'Account',href:'/user-admin'}
+                ...(user ? [] : [{ label: 'Login/SignUp', href: '/auth', onClick: handleLogin }]),
               ].map((item) => (
                 <a
                   key={item.label}
@@ -118,6 +146,23 @@ export const Header = () => {
                   {item.label}
                 </a>
               ))}
+              {user && (
+                <>
+                  <a
+                    href="/account"
+                    className="block text-base font-medium text-white hover:text-indigo-100 hover:bg-white hover:bg-opacity-10 px-3 py-2 rounded-lg"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Account
+                  </a>
+                  <button
+                    onClick={handleLogout}
+                    className="block text-base font-medium text-white hover:text-indigo-100 hover:bg-white hover:bg-opacity-10 px-3 py-2 rounded-lg w-full text-left"
+                  >
+                    Logout
+                  </button>
+                </>
+              )}
             </div>
           </div>
         )}
@@ -125,6 +170,3 @@ export const Header = () => {
     </header>
   );
 };
-
-
-

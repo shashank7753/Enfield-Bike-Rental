@@ -17,6 +17,7 @@ import { Contact } from './pages/Contact';
 import { reviews } from './data/reviews';
 import AccountPage from './components/Accounts/AdminPortal';
 import UserPortal from './components/Accounts/UserPortal';
+import ConfirmationPage from './pages/ConfirmationPage';
 
 const App: React.FC = () => {
   return (
@@ -62,7 +63,9 @@ const App: React.FC = () => {
               </>
             }
           />
-
+           <Route path="/" element={<Hero />} />
+           <Route path="/motorcycles" element={<MotorcycleList />} /> 
+           <Route path="/confirmation" element={<ConfirmationPage />} />
           {/* About Us, How It Works, Safety, Contact Routes */}
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/how-it-works" element={<HowItWorks />} />
@@ -138,7 +141,7 @@ const App: React.FC = () => {
         </h3>
         <div className="space-y-4">
           {[
-            { icon: '📧', text: 'Shashank33379@gmail.com', href: 'mailto:Shashank33379@gmail.com' },
+            { icon: '📧', text: 'EnfieldBR@gmail.com', href: 'mailto:Shashank33379@gmail.com' },
             { icon: '📱', text: '(775) 303-3379', href: 'tel:7753033379' },
             { icon: '📍', text: '168 Ek Omkar, Kharar, Mohali, Punjab-140413', href: 'https://maps.google.com/?q=168 Ek Omkar, Kharar, Mohali, Punjab-140413' }
           ].map((contact, index) => (

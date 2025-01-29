@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { Star } from 'lucide-react';
 import MotorcyclePayment from './MotorcyclePayment';
+import { useNavigate } from 'react-router-dom'; 
 import { Motorcycle } from '../../types';
 
 interface MotorcycleCardProps {
@@ -10,8 +12,19 @@ interface MotorcycleCardProps {
 export const MotorcycleCard: React.FC<MotorcycleCardProps> = ({ motorcycle }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const navigate = useNavigate();
 
-  const openModal = () => setIsModalOpen(true);
+  const openModal = () => {
+    const userToken = localStorage.getItem('userToken'); 
+
+    if (!userToken) {
+      navigate('/Auth'); // Redirect to login/signup if not authenticated
+      return;
+    }
+
+    setIsModalOpen(true); // Open the modal if authenticated
+  };
+
   const closeModal = () => {
     setIsModalOpen(false);
     setErrorMessage(null);
@@ -19,6 +32,7 @@ export const MotorcycleCard: React.FC<MotorcycleCardProps> = ({ motorcycle }) =>
 
   const handleConfirm = () => {
     console.log('Renting motorcycle:', motorcycle.name);
+    navigate('/confirmation', { state: { motorcycle } });
   };
 
   return (

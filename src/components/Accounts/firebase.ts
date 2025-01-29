@@ -1,6 +1,7 @@
 // firebase.ts
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { useNavigate } from 'react-router-dom';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -15,7 +16,6 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
-import { useNavigate } from 'react-router-dom';
 
 const handleLogin = async (email: string, password: string) => {
   const navigate = useNavigate();

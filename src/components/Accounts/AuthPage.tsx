@@ -34,7 +34,7 @@ export const AuthPage: React.FC = () => {
   };
 
    const getUserRole = async (uid: string) => {
-    console.log("UID: ", uid);  // Check if UID is correct
+    console.log("UID: ", uid);  
     try {
       const userDoc = await getDoc(doc(db, 'users', uid));
       if (userDoc.exists()) {
@@ -54,49 +54,56 @@ export const AuthPage: React.FC = () => {
       const userRef = doc(db, 'users', uid);
       await setDoc(userRef, {
         email,
-        role: 'user', // Default to 'user' role, could be changed if necessary
+        role: 'user', 
       });
     } catch (err) {
       setError('Failed to create user in database');
     }
   }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
     setLoading(true);
-
+  
+    // Validation
     if (!email || !password) {
       setError('Email and password are required.');
       setLoading(false);
       return;
     }
-
+  
     if (!isLogin && password !== confirmPassword) {
       setError('Passwords do not match.');
       setLoading(false);
       return;
     }
-
+  
     try {
       if (isLogin) {
+        // Login logic
         const userCredential = await signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
+        const token = await user.getIdToken();
+        localStorage.setItem('userToken', token);
+        localStorage.setItem('userUID', user.uid);
+  
         const role = await getUserRole(user.uid);
-
         if (role === 'admin') {
-          navigate('/admin'); // Redirect to admin page if user is an admin
+          navigate('/admin');
         } else {
-          navigate('/#'); // Redirect to home page if user is a regular user
+          navigate('/#');
         }
       } else {
+        // Sign-up logic
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
-        
-        // Create user in Firestore database
+  
         await createUserInDatabase(user.uid);
-        
-        // Redirect to home page after sign up
+  
+        const token = await user.getIdToken();
+        localStorage.setItem('userToken', token);
+        localStorage.setItem('userUID', user.uid);
+  
         navigate('/home');
       }
     } catch (err: any) {
@@ -110,7 +117,6 @@ export const AuthPage: React.FC = () => {
     <div className="relative flex items-center justify-center min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url(/path-to-your-motorcycle-image.jpg)' }}>
       <div className="absolute inset-0 bg-gradient-to-r from-indigo-500 via-blue-600 to-purple-800 opacity-50 animate-gradient" />
       
-      {/* Main Content */}
       <div className="relative w-full max-w-md p-8 bg-white bg-opacity-90 shadow-lg rounded-lg">
         <h2 className="text-3xl font-bold text-center text-indigo-600 mb-6">
           {isLogin ? 'Login' : 'Sign Up'}
